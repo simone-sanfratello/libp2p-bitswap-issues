@@ -8,6 +8,10 @@ const ANNOUNCE_ADDR = '/dns4/example.com/tcp/3000/ws'
 const PORT = 3000
 const PROTOCOL = '/ipfs/bitswap/1.2.0'
 
+function sleep(ms) {
+  return new Promise(resolve => { setTimeout(resolve, ms) })
+}
+
 async function main() {
   let address
   try {
