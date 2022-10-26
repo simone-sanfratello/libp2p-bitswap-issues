@@ -47,19 +47,21 @@ async function main() {
 
     connection.close()
     client.stop()
-    stream.close()
+    // stream.close()
 
-    await sleep(500)
+    await sleep(10)
 
     const peerConnections = Array.from(node.connectionManager.connections.entries())
     console.log('node should have only 1 peer with connections', peerConnections.length)
 
-    const [, connnections] = peerConnections[0]
-    console.log('node should have 1 connection to client, got', connnections.length)
+    const peerConnection = peerConnections[0]
+    if (peerConnection) {
+      const [, connnections] = peerConnection
+      console.log('node should have 1 connection to client, got', connnections.length)
 
-    const streams = connnections[0].streams
-    console.log('node should have 0 open streams to client, got', streams.length)
-
+      const streams = connnections[0].streams
+      console.log('node should have 0 open streams to client, got', streams.length)
+    }
   } catch (err) {
     console.error('! Error ', { address })
     console.error(err)
